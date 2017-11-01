@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../collectionviewexcersice-partone/Assets.xcassets">
+   </FileRef>
+   <FileRef
+      location = "self:collectionviewexcersice-partone.xcodeproj">
+   </FileRef>
+</Workspace>
