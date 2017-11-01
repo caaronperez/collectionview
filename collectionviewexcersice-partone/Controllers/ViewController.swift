@@ -10,11 +10,11 @@ import UIKit
 
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var recipeCollection: UICollectionView!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var editButton: UIBarButtonItem!
-    var persons: [Person] = [Person(firstName: "Cristian", middleName: "M.", lastName: "Tejeda", age: 22), Person(firstName: "Katya", middleName: "V.", lastName: "Ortega", age: 20), Person(firstName: "Carlos", middleName: "A.", lastName: "Anza", age: 38), Person(firstName: "Arturo", middleName: "D.", lastName: "De la Barrera", age: 29)]
+    var persons: [Person] = [Person(firstName: "Cristian", middleName: "M.", lastName: "Tejeda", age: 22), Person(firstName: "Katya", middleName: "V.", lastName: "Ortega", age: 20), Person(firstName: "Carlos", middleName: "A.", lastName: "Anza", age: 38), Person(firstName: "Arturo", middleName: "D.", lastName: "De la Barrera", age: 29), Person(firstName: "Gael", middleName: "S.", lastName: "Martinez Martinez", age: 13)]
     private var edit = false
     
     @IBAction func didPressEdit(_ sender: Any) {
@@ -25,23 +25,29 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didPressDelete(_ sender: Any) {
-        let selectedIndexPaths: [IndexPath] = self.recipeCollection.indexPathsForSelectedItems!
-        var newPersons: [Person] = []
-        for i in 1...self.persons.count {
-            var found: Bool = false
-            for indexPath in selectedIndexPaths {
-                if indexPath.row == i {
-                    found = true
-                    break
+        if persons.count != 0 {
+            let selectedIndexPaths: [IndexPath] = self.recipeCollection.indexPathsForSelectedItems!
+            var newPersons: [Person] = []
+            for i in 1...self.persons.count {
+                var found: Bool = false
+                for indexPath in selectedIndexPaths {
+                    if indexPath.row == i-1 {
+                        found = true
+                        break
+                    }
+                }
+                if found == false {
+                    newPersons.append(self.persons[i-1])
                 }
             }
-            if found == false {
-                newPersons.append(self.persons[i-1])
-            }
+            
+            self.persons = newPersons
+            self.recipeCollection.deleteItems(at: selectedIndexPaths)
         }
-        
-        self.persons = newPersons
-        self.recipeCollection.deleteItems(at: selectedIndexPaths)
+        edit = edit ? false : true
+        editButton.title = edit ? "Done" : "Edit"
+        self.navigationController?.setToolbarHidden(!edit, animated: true)        //recipeCollection.setEditing(edit, animated: true)
+        setEditing(edit, animated: edit)
     }
     
     override func viewDidLoad() {
@@ -50,7 +56,7 @@ class ViewController: UIViewController {
         recipeCollection.register(UINib(nibName: CollectionViewCellController.nibName, bundle: nil), forCellWithReuseIdentifier: CollectionViewCellController.nibName)
         self.title = "🕺 Persons 💃"
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -63,7 +69,7 @@ class ViewController: UIViewController {
             }
         }
     }
-
+    
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -88,7 +94,7 @@ extension ViewController: UICollectionViewDataSource {
         let indexPaths: [IndexPath] = self.recipeCollection.indexPathsForVisibleItems
         
         for indexPath in indexPaths {
-            self.recipeCollection.deselectItem(at: indexPath, animated: false)
+            self.recipeCollection.deselectItem(at: indexPath, animated: !edit)
             let cell = self.recipeCollection.cellForItem(at: indexPath) as? CollectionViewCellController
             cell?.editing = editing
         }
