@@ -8,36 +8,86 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var recipeCollection: UICollectionView!
     @IBOutlet weak var backgroundImage: UIImageView!
-    var images = [#imageLiteral(resourceName: "l1"),#imageLiteral(resourceName: "l2"),#imageLiteral(resourceName: "l3"),#imageLiteral(resourceName: "l5"),#imageLiteral(resourceName: "l6"),#imageLiteral(resourceName: "l7"),#imageLiteral(resourceName: "l8"),#imageLiteral(resourceName: "l9"),#imageLiteral(resourceName: "l10"),#imageLiteral(resourceName: "l11"),#imageLiteral(resourceName: "l12"),#imageLiteral(resourceName: "l13"),#imageLiteral(resourceName: "l14"),#imageLiteral(resourceName: "l15"),#imageLiteral(resourceName: "l16"),#imageLiteral(resourceName: "l4")]
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    var persons: [Person] = [Person(firstName: "Cristian", middleName: "M.", lastName: "Tejeda", age: 22), Person(firstName: "Katya", middleName: "V.", lastName: "Ortega", age: 20), Person(firstName: "Carlos", middleName: "A.", lastName: "Anza", age: 38), Person(firstName: "Arturo", middleName: "D.", lastName: "De la Barrera", age: 29)]
+    private var edit = false
+    
+    @IBAction func didPressEdit(_ sender: Any) {
+        edit = edit ? false : true
+        editButton.title = edit ? "Done" : "Edit"
+        self.navigationController?.setToolbarHidden(!edit, animated: true)        //recipeCollection.setEditing(edit, animated: true)
+    }
+    
+    @IBAction func didPressDelete(_ sender: Any) {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        backgroundImage.image = #imageLiteral(resourceName: "background")
+        backgroundImage.image = #imageLiteral(resourceName: "backgroundthree")
+        recipeCollection.register(UINib(nibName: CollectionViewCellController.nibName, bundle: nil), forCellWithReuseIdentifier: CollectionViewCellController.nibName)
+        self.title = "🕺 Persons 💃"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    @IBAction func unwindToThisView(sender: UIStoryboardSegue) {
+        if let source = sender.source as? PersonCreatorViewController {
+            persons.append((source.person)!)
+            recipeCollection.reloadData()
+        }
+    }
 
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return persons.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        let image: UIImageView = cell.viewWithTag(100) as! UIImageView
-        image.image = images[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellController.nibName, for: indexPath) as! CollectionViewCellController
+        cell.person = persons[indexPath.row]
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
+        cell.awakeFromNib()
+        
         return cell
     }
+}
+
+extension ViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: Segues.showPresenterFromCollection, sender: persons[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segues.showPresenterFromCollection {
+            if let presenter = segue.destination as? PersonPresenterViewController {
+                if let postObject = sender as? Person {
+                    presenter.person = postObject
+                }
+            }
+        }
+    }
+}
+
+extension ViewController {
     
     
+}
+
+
+struct Segues {
+    static let showCreatorFromCollection = "showCreatorFromCollection"
+    static let showPresenterFromCollection = "showPresenterFromCollection"
 }
 

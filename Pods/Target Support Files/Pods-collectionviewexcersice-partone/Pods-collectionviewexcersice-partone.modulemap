@@ -1,0 +1,6 @@
+framework module Pods_collectionviewexcersice_partone {
+  umbrella header "Pods-collectionviewexcersice-partone-umbrella.h"
+
+  export *
+  module * { export * }
+}
