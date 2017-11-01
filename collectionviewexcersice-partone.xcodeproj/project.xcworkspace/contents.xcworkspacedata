@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/mcsdevices/Desktop/OneDrive/iOS Training/collectionviewexcersice-partone/collectionviewexcersice-partone/CollectionViewCellController.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/mcsdevices/Desktop/OneDrive/iOS Training/collectionviewexcersice-partone/collectionviewexcersice-partone/CollectionViewCellController.xib">
+   </FileRef>
+   <FileRef
       location = "group:../collectionviewexcersice-partone/Assets.xcassets">
    </FileRef>
    <FileRef
