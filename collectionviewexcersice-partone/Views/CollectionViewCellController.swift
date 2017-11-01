@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import M13Checkbox
 
 class CollectionViewCellController: UICollectionViewCell {
 
@@ -19,6 +20,20 @@ class CollectionViewCellController: UICollectionViewCell {
     @IBOutlet weak var ageStepper: UIStepper!
     var flagImageView: UIImageView?
     var checkboxImageView: UIImageView?
+    var editing: Bool = false {
+        didSet {
+            self.checkboxImageView?.isHidden = !editing
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if editing {
+                self.checkboxImageView!.image = UIImage(named: isSelected ? "checked" : "unchecked")
+            }
+        }
+    }
+
     
     @IBAction func didPressAgeStepper(_ sender: Any) {
         person?.age = Int(ageStepper.value)
@@ -28,6 +43,21 @@ class CollectionViewCellController: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        checkboxImageView = UIImageView()
+        checkboxImageView!.translatesAutoresizingMaskIntoConstraints = false
+        checkboxImageView!.contentMode = .scaleAspectFit
+        checkboxImageView!.clipsToBounds = true
+        checkboxImageView!.isHidden = true
+        checkboxImageView!.animationDuration = (TimeInterval(1))
+        checkboxImageView!.image = #imageLiteral(resourceName: "unchecked")
+        self.contentView.addSubview(checkboxImageView!)
+        checkboxImageView!.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
+        checkboxImageView!.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -10.0).isActive = true
+        checkboxImageView!.widthAnchor.constraint(equalToConstant: 20.0).isActive = true
+        checkboxImageView!.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        
+        
         if let age = person?.age {
             ageStepper.value = Double(age)
             ageLabel.text = "\(person?.age ?? 0)"

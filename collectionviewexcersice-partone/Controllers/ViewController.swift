@@ -21,10 +21,27 @@ class ViewController: UIViewController {
         edit = edit ? false : true
         editButton.title = edit ? "Done" : "Edit"
         self.navigationController?.setToolbarHidden(!edit, animated: true)        //recipeCollection.setEditing(edit, animated: true)
+        setEditing(edit, animated: edit)
     }
     
     @IBAction func didPressDelete(_ sender: Any) {
+        let selectedIndexPaths: [IndexPath] = self.recipeCollection.indexPathsForSelectedItems!
+        var newPersons: [Person] = []
+        for i in 1...self.persons.count {
+            var found: Bool = false
+            for indexPath in selectedIndexPaths {
+                if indexPath.row == i {
+                    found = true
+                    break
+                }
+            }
+            if found == false {
+                newPersons.append(self.persons[i-1])
+            }
+        }
         
+        self.persons = newPersons
+        self.recipeCollection.deleteItems(at: selectedIndexPaths)
     }
     
     override func viewDidLoad() {
@@ -40,8 +57,10 @@ class ViewController: UIViewController {
     
     @IBAction func unwindToThisView(sender: UIStoryboardSegue) {
         if let source = sender.source as? PersonCreatorViewController {
-            persons.append((source.person)!)
-            recipeCollection.reloadData()
+            if source.person != nil {
+                persons.append((source.person)!)
+                recipeCollection.reloadData()
+            }
         }
     }
 
@@ -62,15 +81,29 @@ extension ViewController: UICollectionViewDataSource {
         
         return cell
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.recipeCollection.allowsMultipleSelection = editing
+        let indexPaths: [IndexPath] = self.recipeCollection.indexPathsForVisibleItems
+        
+        for indexPath in indexPaths {
+            self.recipeCollection.deselectItem(at: indexPath, animated: false)
+            let cell = self.recipeCollection.cellForItem(at: indexPath) as? CollectionViewCellController
+            cell?.editing = editing
+        }
+    }
 }
+
+
 
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: Segues.showPresenterFromCollection, sender: persons[indexPath.row])
+        if !edit { performSegue(withIdentifier: Segues.showPresenterFromCollection, sender: persons[indexPath.row]) }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segues.showPresenterFromCollection {
+        if segue.identifier == Segues.showPresenterFromCollection, !edit {
             if let presenter = segue.destination as? PersonPresenterViewController {
                 if let postObject = sender as? Person {
                     presenter.person = postObject

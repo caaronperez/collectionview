@@ -12,14 +12,19 @@ class PersonCreatorViewController: UIViewController {
 
     var person: Person?
     
+    @IBOutlet weak var personImage: UIImageView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var middleNameTextField: UITextField!
     @IBOutlet weak var ageTextFiel: UITextField!
-    
+    @IBOutlet weak var backgrounImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Create new person 👨‍💻"
+        personImage.layer.cornerRadius = personImage.frame.size.width/2
+        personImage.clipsToBounds = true
+        personImage.image = #imageLiteral(resourceName: "user")
+        backgrounImage.image = #imageLiteral(resourceName: "backgroundthree")
     }
 
     override func didReceiveMemoryWarning() {

@@ -114,6 +114,35 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BB007F481FA9B730008D92C3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BB939C811FA97821009445B8 /* PersonCreatorViewController.swift */,
+				BB939C431FA90B6C009445B8 /* ViewController.swift */,
+				BB939C7F1FA970D2009445B8 /* PersonPresenterViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		BB007F491FA9B73C008D92C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BB939C451FA90B6C009445B8 /* Main.storyboard */,
+				BB939C791FA956E8009445B8 /* CollectionViewCellController.swift */,
+				BB939C7A1FA956E8009445B8 /* CollectionViewCellController.xib */,
+				BB939C4D1FA90B6C009445B8 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BB007F4A1FA9B743008D92C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BB939C7D1FA95E32009445B8 /* Person.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BB939C351FA90B6C009445B8 = {
 			isa = PBXGroup;
 			children = (
@@ -139,18 +168,13 @@
 		BB939C401FA90B6C009445B8 /* collectionviewexcersice-partone */ = {
 			isa = PBXGroup;
 			children = (
+				BB007F4A1FA9B743008D92C3 /* Models */,
+				BB007F491FA9B73C008D92C3 /* Views */,
+				BB007F481FA9B730008D92C3 /* Controllers */,
 				BB939C411FA90B6C009445B8 /* AppDelegate.swift */,
-				BB939C431FA90B6C009445B8 /* ViewController.swift */,
-				BB939C7D1FA95E32009445B8 /* Person.swift */,
-				BB939C451FA90B6C009445B8 /* Main.storyboard */,
-				BB939C811FA97821009445B8 /* PersonCreatorViewController.swift */,
-				BB939C7F1FA970D2009445B8 /* PersonPresenterViewController.swift */,
-				BB939C4D1FA90B6C009445B8 /* LaunchScreen.storyboard */,
 				BB939C501FA90B6C009445B8 /* Info.plist */,
 				BB939C481FA90B6C009445B8 /* collectionviewexcersice_partone.xcdatamodeld */,
 				BB939C721FA9422A009445B8 /* Assets.xcassets */,
-				BB939C791FA956E8009445B8 /* CollectionViewCellController.swift */,
-				BB939C7A1FA956E8009445B8 /* CollectionViewCellController.xib */,
 			);
 			path = "collectionviewexcersice-partone";
 			sourceTree = "<group>";

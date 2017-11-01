@@ -16,6 +16,7 @@ class PersonPresenterViewController: UIViewController {
     @IBOutlet weak var middleNameLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     weak var person: Person?
+    @IBOutlet weak var backgrounImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,11 @@ class PersonPresenterViewController: UIViewController {
         if let lastName = person?.lastName {
             lastNameLabel.text = lastName
         }
+ 
+        personImage.layer.cornerRadius = personImage.frame.size.width/2
+        personImage.clipsToBounds = true
+        personImage.image = #imageLiteral(resourceName: "user")
+        backgrounImage.image = #imageLiteral(resourceName: "backgroundone")
     }
 
     override func didReceiveMemoryWarning() {

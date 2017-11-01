@@ -99,6 +99,10 @@
                             <action selector="didPressAgeStepper:" destination="gTV-IL-0wX" eventType="valueChanged" id="o2R-li-Jmw"/>
                         </connections>
                     </stepper>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6NX-zj-Eav">
+                        <rect key="frame" x="124" y="9" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.29003044962882996" green="0.71600276231765747" blue="0.96203058958053589" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
