@@ -52,6 +52,7 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem title="Delete" id="geC-FD-yxq">
+                            <color key="tintColor" red="1" green="0.0" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="didPressDelete:" destination="BYZ-38-t0r" id="v15-BC-wxe"/>
                             </connections>
@@ -59,11 +60,13 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="aIm-K1-589">
                         <barButtonItem key="leftBarButtonItem" title="Edit" id="Myk-3L-lbC">
+                            <color key="tintColor" red="0.09309665419473194" green="0.2835846026302376" blue="0.65139197335025378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didPressEdit:" destination="BYZ-38-t0r" id="4a8-cB-MRR"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Create" id="rjr-Vi-Gel">
+                            <color key="tintColor" red="0.1990109177807485" green="0.78180469443955403" blue="0.25717360575163717" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="AoT-r3-THd" kind="show" identifier="showCreatorFromCollection" id="TuF-TP-Srz"/>
                             </connections>
@@ -305,7 +308,8 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zoa-2b-6r6">
-                                <rect key="frame" x="164" y="522" width="46" height="30"/>
+                                <rect key="frame" x="158.5" y="522" width="57" height="34"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <segue destination="d4V-lJ-nkq" kind="unwind" unwindAction="unwindToThisViewWithSender:" id="0CK-61-nro"/>

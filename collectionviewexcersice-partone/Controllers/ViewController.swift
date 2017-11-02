@@ -83,8 +83,12 @@ extension ViewController: UICollectionViewDataSource {
         cell.person = persons[indexPath.row]
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
+        cell.layer.shadowOffset = CGSize(width: 10, height: 8)
+        cell.layer.shadowColor = UIColor.darkGray.cgColor
+        cell.layer.shadowRadius = 8.0
+        cell.layer.shadowOpacity = 0.8
+      
         cell.awakeFromNib()
-        
         return cell
     }
     

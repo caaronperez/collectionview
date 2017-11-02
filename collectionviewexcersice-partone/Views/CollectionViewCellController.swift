@@ -58,6 +58,9 @@ class CollectionViewCellController: UICollectionViewCell {
         checkboxImageView!.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
         
         
+
+        
+        
         if let age = person?.age {
             ageStepper.value = Double(age)
             ageLabel.text = "\(person?.age ?? 0)"
